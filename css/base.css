@@ -1,0 +1,419 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 16px;
+  --color-text: #b8afaa;
+  --color-bg: #000;
+  --color-link: #968a84;
+  --color-link-hover: #fff;
+  --page-padding: 1rem;
+  --color-highlight-start: #968a84;
+  --color-highlight-end: #968a84;
+  --color-highlight-end-alt: #968a84;
+}
+
+html,
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  font-family: "parabolica", serif;
+  line-height: 1;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url(../img/noise.png), radial-gradient(ellipse at top, #242937, transparent), radial-gradient(ellipse at bottom, #171340, transparent);
+  background-size: 200px, 100%, 200%;
+  background-attachment: fixed;
+}
+
+/* Page Loader */
+.js .loading::before,
+.js .loading::after {
+  content: '';
+  position: fixed;
+  z-index: 1000;
+}
+
+.js .loading::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg);
+}
+
+.js .loading::after {
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  opacity: 0.4;
+  background: var(--color-link);
+  animation: loaderAnim 0.7s linear infinite alternate forwards;
+}
+
+@keyframes loaderAnim {
+  to {
+    opacity: 1;
+    transform: scale3d(0.7, 0.7, 1);
+  }
+}
+
+a {
+  text-decoration: underline;
+  color: var(--color-link);
+  outline: none;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: none;
+  color: var(--color-link-hover);
+  outline: none;
+}
+
+/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+a:focus {
+  /* Provide a fallback style for browsers
+	 that don't support :focus-visible */
+  outline: none;
+}
+
+a:focus-visible {
+  /* Draw a very noticeable focus style for
+	 keyboard-focus on browsers that do support
+	 :focus-visible */
+  outline: 2px solid red;
+}
+
+.unbutton {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.unbutton:focus {
+  outline: none;
+}
+
+main {
+  padding: var(--page-padding);
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.frame {
+  opacity: 0.6;
+  font-size: 12px;
+  position: relative;
+  display: grid;
+  width: 100%;
+  grid-row-gap: 1rem;
+  grid-column-gap: 2rem;
+  pointer-events: none;
+  justify-items: start;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.frame--header {
+  grid-template-columns: 100%;
+  grid-template-areas: 'title' 'back' 'archive' 'github' 'tags' 'sponsor';
+}
+
+.frame--footer {
+  margin-top: 40vh;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+}
+
+.frame #cdawrap {
+  justify-self: start;
+}
+
+.frame a {
+  pointer-events: auto;
+}
+
+.frame__title {
+  grid-area: title;
+  font-size: inherit;
+  font-weight: 400;
+  margin: 0;
+}
+
+.frame__back {
+  grid-area: back;
+  justify-self: start;
+}
+
+.frame__archive {
+  grid-area: archive;
+  justify-self: start;
+}
+
+.frame__github {
+  grid-area: github;
+}
+
+.intro {
+  display: grid;
+  min-height: 50vh;
+  margin-bottom: 80vh;
+}
+
+.intro h2 {
+  font-size: clamp(2rem, 6vw, 8rem);
+  line-height: 0.8;
+  margin: 0;
+  align-self: end;
+  text-transform: uppercase;
+  font-family: "the-seasons", serif;
+  font-weight: 300;
+}
+
+.intro h2 > span {
+  animation: shine 2s linear forwards;
+}
+
+@keyframes shine {
+  from {
+    filter: brightness(60%) blur(6px);
+  }
+  to {
+    filter: brightness(150%) blur(0px);
+  }
+}
+
+.content {
+  display: grid;
+  min-height: 100vh;
+  font-size: clamp(2rem,7vw,3.25rem);
+  line-height: 1.2;
+  letter-spacing: -0.0225em;
+}
+
+.content__inner {
+  justify-self: start;
+  margin-bottom: 60vh;
+}
+
+.content__inner p {
+  margin: 0;
+  max-width: 900px;
+  text-wrap: balance;
+}
+
+.hx {
+  background: none;
+  color: var(--color-highlight-start);
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+}
+
+.hx-3 {
+  --color-highlight-end: #d686c1;
+}
+
+.hx-4 {
+  --color-highlight-end: #49af42;
+  --color-highlight-end-alt: #4252af;
+}
+
+.hx-5 {
+  display: inline-flex;
+  --after-scale: 1;
+  --color-bg-highlight: #6a5ace;
+  --color-highlight-start: #e1def4;
+}
+
+.hx-5::after {
+  content: '';
+  left: -2.5%;
+  top: 10%;
+  bottom: -7.5%;
+  position: absolute;
+  z-index: -1;
+  width: 105%;
+  transform: scale3D(var(--after-scale),var(--after-scale),var(--after-scale));
+  background: var(--color-bg-highlight);
+  border-radius: 8px;
+}
+
+.hx-6 {
+  display: inline-flex;
+  --after-width: 0%;
+  --after-width-final: 105%;
+  --color-bg-highlight: #dc764c;
+  --color-highlight-start: #fadabd;
+}
+
+.hx-6::after {
+  content: '';
+  left: -2.5%;
+  top: 15%;
+  bottom: -10.5%;
+  position: absolute;
+  z-index: -1;
+  width: var(--after-width);
+  background: var(--color-bg-highlight);
+  border-radius: 8px;
+}
+
+.hx-7 {
+  --after-height: 0%;
+  --after-height-final: 100%;
+  --color-bg-highlight: #437745;
+  --color-highlight-start: #d2f2d3;
+}
+
+.hx-7::after {
+  content: '';
+  left: -2.5%;
+  top: 10%;
+  position: absolute;
+  z-index: -1;
+  width: 105%;
+  height: var(--after-height);
+  background: var(--color-bg-highlight);
+  border-radius: 8px;
+}
+
+.hx-8 {
+  --color-highlight-end: #c3c58c;
+}
+
+.hx-9 {
+  --color-highlight-start: rgb(84 77 73 / 61%);
+  --color-highlight-end: var(--color-text);
+}
+
+.hx-9 .word:first-child {
+  position: absolute;
+  --color-highlight-end: #a86088;
+  color: var(--color-highlight-end);
+}
+
+.hx-10 {
+  --color-highlight-start: var(--color-text);
+}
+
+.hx-10 .word {
+  position: absolute;
+}
+
+.hx-10 .word:last-child {
+  position: relative;
+}
+
+.hx-flip {
+  font-size: clamp(2rem,20vw,22rem);
+  margin: 0;
+  position: relative;
+}
+
+.hx-flip__inner,
+.hx-flip__placeholder {
+  font-weight: 200;
+  background: none;
+  color: inherit;
+  display: inline-block;
+}
+
+.hx-flip__placeholder,
+.hx__placeholder {
+  opacity: 0;
+}
+
+.hx-flip__inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.word,
+.word > .char {
+  display: inline-block;
+}
+
+.hx-12 {
+  --color-highlight-start: rgb(84 77 73 / 61%);
+  --color-highlight-end: #fff;
+}
+
+.hx-12 .word:nth-child(n+2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  --color-highlight-end: #fff;
+  color: var(--color-highlight-end);
+}
+
+.hx-13 {
+  position: relative;
+  --select-width: 0%;
+  --select-width-final: 103%;
+  --color-highlight-start: var(--color-text);
+}
+
+.hx__select {
+  position: absolute;
+  width: var(--select-width);
+  height: 100%;
+  left: -1%;
+  top: 10%;
+  background: rgb(109 215 230 / 14%);
+  mix-blend-mode: plus-lighter;
+}
+
+.hx__select::before,
+.hx__select::after {
+  content: '';
+  position: absolute;
+  top: -0.125em;
+  left: -0.075em;
+  width: 0.155em;
+  height: calc(100% + 0.1275em);
+  background: url(../img/select.svg) no-repeat 0 0;
+  background-size: auto 100%;
+}
+
+.hx__select::after {
+  transform: scaleY(-1);
+  left: auto;
+  right: -0.075em;
+  top: auto;
+  bottom: -0.125em;
+}
+
+@media screen and (min-width: 53em) {
+  body {
+    --page-padding: 2rem 3rem;
+  }
+  .frame--header {
+    grid-template-columns: auto auto auto auto 1fr;
+    grid-template-areas: 'title back archive github tags sponsor';
+  }
+  .frame #cdawrap {
+    justify-self: end;
+  }
+  .intro {
+    height: calc(100vh - 6rem);
+  }
+}
