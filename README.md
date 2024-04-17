@@ -2,7 +2,7 @@
 
 Some scroll-based text highlight effects.
 
-![Text Highlight]()
+![Text Highlight](https://tympanus.net/codrops/wp-content/uploads/2024/04/TextHighlight.jpg?x32096)
 
 [Article on Codrops](https://tympanus.net/codrops/?p=76961)
 
